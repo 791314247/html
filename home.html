@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>局域网网站导航</title>
+<style>
+  body {
+    padding-top: 10px;
+  }
+  .jumbotron {
+    background: linear-gradient(to right, #C6F0FF, #C6F0FF); /* 星空蓝渐变 */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  .link-item {
+    padding: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-5">欢迎访问网站导航！</h1>
+    <p class="lead">这里有你需要的网站链接。</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>常用网站</h2>
+      <ul id="linkList" class="list-group">
+        <!-- 这里将显示用户添加的链接 -->
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>资源下载</h2>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a href="/get-software">产品线资源链接</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="js/jquery-3.5.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+  // 固定的 emoji 列表
+  var emojis = ["🌟", "🚀", "💻", "🔗", "🌐", "🔍", "🎉", "💡", "🌈", "📚"];
+  var currentEmojiIndex = 0; // 当前 emoji 的索引
+
+  // 预设链接名称和 URL
+  var presetLinks = [
+    { name: "Gitlab:      172.17.0.100:8080", url: "http://172.17.0.100:8080/" },
+    { name: "禅道:        172.17.0.100:9191", url: "http://172.17.0.100:9191/zentao/my/" },
+    { name: "SVN:         192.168.1.14/svn/dihill/zcpower/", url: "http://192.168.1.14/svn/dihill/zcpower/" },
+	{ name: "公司邮箱:    mail.zc-power.com", url: "http://mail.zc-power.com/" },
+	{ name: "Jfrog:       172.17.0.250:8082", url: "http://172.17.0.250:8082/" },
+  ];
+
+  // 添加预设链接到列表中
+  presetLinks.forEach(function(link) {
+    addLinkToList(link.name, link.url);
+  });
+
+  function addLinkToList(name, url) {
+    var linkList = document.getElementById("linkList");
+    var listItem = document.createElement("li");
+    listItem.classList.add("list-group-item", "link-item");
+    var link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank"; // 在新标签页打开链接
+    link.innerHTML = `<span>${getEmoji()}</span>&nbsp;&nbsp;<span>${name}</span>`;
+    listItem.appendChild(link);
+    linkList.appendChild(listItem);
+  }
+
+  // 获取下一个 emoji
+  function getEmoji() {
+    var emoji = emojis[currentEmojiIndex];
+    currentEmojiIndex = (currentEmojiIndex + 1) % emojis.length; // 循环遍历 emoji 列表
+    return emoji;
+  }
+</script>
+</body>
+</html>
